@@ -315,25 +315,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1152955186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7834829615741617392, guid: 0da20e669b4912143bfc96e66e9c8153, type: 3}
-  m_PrefabInstance: {fileID: 7834829614722971586}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1152955192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152955186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73981263c5a548c4a90f316707a556f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _speedOfMovement: 5
 --- !u!1001 &452115144479338119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341,6 +322,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1997764731, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
+      propertyPath: _boxCastSize.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997764731, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
+      propertyPath: _playerLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 1543571436268770282, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
       propertyPath: m_RootOrder
       value: 1

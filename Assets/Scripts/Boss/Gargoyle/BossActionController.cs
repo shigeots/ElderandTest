@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossActionController : MonoBehaviour {
     #region Private attributes
 
+    [SerializeField] private GameObject _clawAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
     [SerializeField] private GameObject _diagonalFireballPrefab;
     [SerializeField] private Transform _horizontaFireballSpawnPoint;
@@ -231,6 +232,16 @@ public class BossActionController : MonoBehaviour {
             fireballRigidbody2D.AddForce(-_diagonalFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
             return;
         }
+    }
+
+    private void ActiveClawAttackCollider() {
+        _clawAttackCollider.SetActive(true);
+        //_clawAttackCollider.GetComponent<CircleCollider2D>().enabled = true;
+    }
+
+    private void DeactiveClawAttackCollider() {
+        _clawAttackCollider.SetActive(false);
+        //_clawAttackCollider.GetComponent<CircleCollider2D>().enabled = false;
     }
 
     #endregion
