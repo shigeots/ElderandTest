@@ -18,6 +18,8 @@ public class BossCoreController : MonoBehaviour {
     [SerializeField] internal float takeOffSpeed;
     [SerializeField] internal float ladingSpeed;
     [SerializeField] internal float flyingDiveSpeed;
+    [SerializeField] internal float fireballSpeed;
+    [SerializeField] internal int fireballDamage;
     [SerializeField] internal int clawDamage;
     [SerializeField] internal int flyingDiveDamage;
 
