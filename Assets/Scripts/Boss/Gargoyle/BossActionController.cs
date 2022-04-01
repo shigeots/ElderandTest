@@ -143,11 +143,13 @@ public class BossActionController : MonoBehaviour {
     private void DoFireballFromGround() {
         Debug.Log("Fireball from ground");
         lastAction = BossAction.FireballFromGround;
+        _bossCoreController.bossAnimationController.PlayFireballFromGroundAnimation();
     }
 
     private void DoFly() {
         Debug.Log("Fly");
         lastAction = BossAction.Fly;
+        _bossCoreController.bossAnimationController.PlayFlyAnimation();
     }
 
     private void DoFireballOrFly() {
@@ -181,6 +183,7 @@ public class BossActionController : MonoBehaviour {
     private void DoFireballFromAir() {
         Debug.Log("Fireball from air");
         lastAction = BossAction.FireballFromAir;
+        _bossCoreController.bossAnimationController.PlayFireballFromAirAnimation();
     }
 
     private void DoAirDive() {
