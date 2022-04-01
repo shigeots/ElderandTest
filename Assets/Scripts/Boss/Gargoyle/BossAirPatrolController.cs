@@ -53,7 +53,7 @@ public class BossAirPatrolController : MonoBehaviour {
     }
 
     private void CheckPatrolTargetSide() {
-        if(Vector3.Distance(transform.position , new Vector3(_borderPatrolTargetSide.position.x, transform.position.y, transform.position.z)) <= 0.2f) {
+        if(Vector3.Distance(transform.position , new Vector3(_borderPatrolTargetSide.position.x, transform.position.y, transform.position.z)) <= 0.1f) {
             ChangePatrolTargetSide();
             _bossCoreController.Flip();
         }
