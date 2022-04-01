@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1418495358
 GameObject:
@@ -58,8 +58,55 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &296451601193473431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3220494669078977488}
+  - component: {fileID: 4801971258842523013}
+  m_Layer: 7
+  m_Name: ClawAttackCollider
+  m_TagString: DamagesThePlayer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3220494669078977488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296451601193473431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.323, y: 0.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1543571436268770282}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4801971258842523013
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296451601193473431}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.023335278, y: -0.15799558}
+  serializedVersion: 2
+  m_Radius: 0.31866914
 --- !u!1 &2752027866906203976
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,10 +143,12 @@ Transform:
   m_LocalPosition: {x: -5.42, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5388242360964417039}
   - {fileID: 228554610}
   - {fileID: 1418495359}
   - {fileID: 1380653431409868226}
   - {fileID: 5879755580619740934}
+  - {fileID: 3220494669078977488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -231,6 +280,11 @@ MonoBehaviour:
   fireballDamage: 15
   clawDamage: 20
   flyingDiveDamage: 0
+  _frontCheck: {fileID: 5388242360964417039}
+  _boxCastSize: {x: 1, y: 1}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
   bossState: 1
   playerIsClose: 0
 --- !u!114 &1997764730
@@ -272,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0831667766629b428bb7f67b96d0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clawAttackCollider: {fileID: 0}
   _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
   _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
   _horizontaFireballSpawnPoint: {fileID: 1380653431409868226}
@@ -289,7 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510604bc017a9a249989045d913e566e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentAnimation: 
 --- !u!1 &4021601759228909289
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +372,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4699043397167883821
 GameObject:
@@ -349,7 +403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 300}
 --- !u!212 &7341185124983935213
 SpriteRenderer:
@@ -402,3 +456,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4829817480988578227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5388242360964417039}
+  m_Layer: 7
+  m_Name: FrontCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5388242360964417039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829817480988578227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1543571436268770282}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
