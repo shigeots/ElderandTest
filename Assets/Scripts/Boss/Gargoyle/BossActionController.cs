@@ -1,33 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossCoreController : MonoBehaviour {
-
+public class BossActionController : MonoBehaviour {
     #region Private attributes
 
-    #endregion
+    [SerializeField] private BossAction lastAction = BossAction.None;
 
-    #region Internal attributes
-
-    [SerializeField] internal float moveSpeed;
-
-    //others variables
-    [SerializeField] internal float delayToAction;
-    [SerializeField] internal float takeOffSpeed;
-    [SerializeField] internal float ladingSpeed;
-    [SerializeField] internal float flyingDiveSpeed;
-    [SerializeField] internal int clawDamage;
-    [SerializeField] internal int flyingDiveDamage;
-
-    [SerializeField] internal BossState bossState = BossState.Air;
-    [SerializeField] internal BossAction lastAction = BossAction.None;
-    [SerializeField] internal bool playerIsClose = false;
-
-    internal BossAirPatrolController bossAirPatrolController;
-    internal BossColliderController bossColliderController;
-    internal Rigidbody2D bossRigidbody2D;
+    private BossCoreController _bossCoreController;
 
     #endregion
 
@@ -39,58 +19,50 @@ public class BossCoreController : MonoBehaviour {
 
     #endregion
 
-    #region Private methods
-
-    private void GetComponents() {
-        bossAirPatrolController = GetComponent<BossAirPatrolController>();
-        bossColliderController = GetComponent<BossColliderController>();
-        bossRigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    #endregion
-
     #region Internal methods
 
-    internal void Flip() {
-        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-    }
-
-    [ContextMenu("Decidir accion")]
     internal void DecideAction() {
-        if(bossState == BossState.Grounded) {
+        if(_bossCoreController.bossState == BossState.Grounded) {
             GroundAction();
             return;
         }
-        if(bossState == BossState.Air) {
+        if(_bossCoreController.bossState == BossState.Air) {
             AirAction();
             return;
         }
     }
 
-    internal void GroundAction() {
-        if(playerIsClose) {
+    #endregion
+
+    #region Private methods
+
+    private void GetComponents() {
+        _bossCoreController = GetComponent<BossCoreController>();
+    }
+
+    private void GroundAction() {
+        if(_bossCoreController.playerIsClose) {
             VerifyGroundLastAction(BossAction.Claw);
             return;
         }
 
         int probability = UnityEngine.Random.Range(1,101);
 
-        if(!playerIsClose && probability > 20) {
+        if(!_bossCoreController.playerIsClose && probability > 20) {
             VerifyGroundLastAction(BossAction.FireballFromGround);
             Debug.Log(probability.ToString());
 
             return;
         }
 
-        if(!playerIsClose && probability <= 20) {
+        if(!_bossCoreController.playerIsClose && probability <= 20) {
             VerifyGroundLastAction(BossAction.Fly);
             Debug.Log(probability.ToString());
             return;
         }
-
     }
 
-    internal void AirAction() {
+    private void AirAction() {
         int probability = UnityEngine.Random.Range(1,101);
 
         if(probability <= 40) {
@@ -114,31 +86,26 @@ public class BossCoreController : MonoBehaviour {
 
     private void VerifyGroundLastAction(BossAction actionToCheck) {
         if(actionToCheck == BossAction.Claw && lastAction != BossAction.Claw) {
-            Debug.Log("Claw");
-            lastAction = BossAction.Claw;
+            DoClaw();
             return;
         }
         if(actionToCheck == BossAction.FireballFromGround && lastAction != BossAction.FireballFromGround) {
-            Debug.Log("Fireball");
-            lastAction = BossAction.FireballFromGround;
+            DoFireballFromGround();
             return;
         }
 
         if(actionToCheck == BossAction.Claw && lastAction == BossAction.Claw) {
-            Debug.Log("Fireball or fly");
-            lastAction = BossAction.FireballFromGround;
+            DoFireballOrFly();
             return;
         }
 
         if(actionToCheck == BossAction.FireballFromGround && lastAction == BossAction.FireballFromGround) {
-            Debug.Log("Claw or fly");
-            lastAction = BossAction.Claw;
+            DoClawOrFly();
             return;
         }
 
         if(actionToCheck == BossAction.Fly) {
-            Debug.Log("Fly");
-            lastAction = BossAction.Fly;
+            DoFly();
             return;
         }
         Debug.Log("bug");
@@ -152,22 +119,78 @@ public class BossCoreController : MonoBehaviour {
         }
 
         if(actionToCheck == BossAction.FireballFromAir) {
-            Debug.Log("Fireball");
-            lastAction = BossAction.FireballFromAir;
+            DoFireballFromAir();
             return;
         }
 
         if(actionToCheck == BossAction.AirDiving) {
-            Debug.Log("Diving");
-            lastAction = BossAction.AirDiving;
+            DoAirDive();
             return;
         }
 
         if(actionToCheck == BossAction.Land) {
-            Debug.Log("Aterrizar");
-            lastAction = BossAction.Land;
+            DoLand();
             return;
         }
+    }
+
+    private void DoClaw() {
+        Debug.Log("Claw");
+        lastAction = BossAction.Claw;
+        _bossCoreController.bossAnimationController.PlayClawAttackAnimation();
+    }
+
+    private void DoFireballFromGround() {
+        Debug.Log("Fireball from ground");
+        lastAction = BossAction.FireballFromGround;
+    }
+
+    private void DoFly() {
+        Debug.Log("Fly");
+        lastAction = BossAction.Fly;
+    }
+
+    private void DoFireballOrFly() {
+        int probability = UnityEngine.Random.Range(1,101);
+
+        if(probability <= 50) {
+            DoFireballFromGround();
+            return;
+        }
+
+        if(probability > 50) {
+            DoFly();
+            return;
+        }
+    }
+
+    private void DoClawOrFly() {
+        int probability = UnityEngine.Random.Range(1,101);
+
+        if(probability <= 50) {
+            DoClaw();
+            return;
+        }
+
+        if(probability > 50) {
+            DoFly();
+            return;
+        }
+    }
+
+    private void DoFireballFromAir() {
+        Debug.Log("Fireball from air");
+        lastAction = BossAction.FireballFromAir;
+    }
+
+    private void DoAirDive() {
+        Debug.Log("Air dive");
+        lastAction = BossAction.AirDiving;
+    }
+
+    private void DoLand() {
+        Debug.Log("Land");
+        lastAction = BossAction.Land;
     }
 
     #endregion
