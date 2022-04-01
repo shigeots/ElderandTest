@@ -27,7 +27,8 @@ public class BossAirPatrolController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        MoveThroughTheAir();
+        if(_bossCoreController.bossState == BossState.Air)
+            MoveThroughTheAir();
     }
 
     #endregion
@@ -44,11 +45,11 @@ public class BossAirPatrolController : MonoBehaviour {
     }
 
     private void MoveThroughTheAir() {
-            //Vector3 _direction = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
-            Vector3 _distance = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
-            Vector3 _direction = new Vector3(_distance.x, 0f, 0f);
+        //Vector3 _direction = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
+        Vector3 _distance = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
+        Vector3 _direction = new Vector3(_distance.x, 0f, 0f);
             
-            _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
+        _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
     }
 
     private void CheckPatrolTargetSide() {
