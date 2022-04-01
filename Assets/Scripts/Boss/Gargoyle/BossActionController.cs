@@ -5,6 +5,11 @@ using UnityEngine;
 public class BossActionController : MonoBehaviour {
     #region Private attributes
 
+    [SerializeField] private GameObject _horizontaFireballPrefab;
+    [SerializeField] private GameObject _diagonalFireballPrefab;
+    [SerializeField] private Transform _horizontaFireballSpawnPoint;
+    [SerializeField] private Transform _diagonalFireballSpawnPoint;
+
     [SerializeField] private BossAction lastAction = BossAction.None;
 
     private BossCoreController _bossCoreController;
@@ -194,6 +199,38 @@ public class BossActionController : MonoBehaviour {
     private void DoLand() {
         Debug.Log("Land");
         lastAction = BossAction.Land;
+    }
+
+    private void ShootHorizontalFireball() {
+        GameObject fireball = Instantiate(_horizontaFireballPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
+        fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
+        Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
+
+        if(transform.localScale.x > 0) {
+            fireballRigidbody2D.AddForce(_horizontaFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
+            return;
+        }
+        if(transform.localScale.x < 0) {
+            fireball.transform.localScale = new Vector2(fireball.transform.localScale.x * -1, fireball.transform.localScale.y);
+            fireballRigidbody2D.AddForce(-_horizontaFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
+            return;
+        }
+    }
+
+    private void ShootDiagonalFireball() {
+        GameObject fireball = Instantiate(_diagonalFireballPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
+        fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
+        Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
+
+        if(transform.localScale.x > 0) {
+            fireballRigidbody2D.AddForce(_diagonalFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
+            return;
+        }
+        if(transform.localScale.x < 0) {
+            fireball.transform.localScale = new Vector2(fireball.transform.localScale.x * -1, fireball.transform.localScale.y);
+            fireballRigidbody2D.AddForce(-_diagonalFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
+            return;
+        }
     }
 
     #endregion
