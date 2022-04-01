@@ -9,7 +9,7 @@ public class BossAnimationController : MonoBehaviour {
     private BossCoreController _bossCoreController;
     private Animator _animator;
 
-    public string _currentAnimation;
+    private string _currentAnimation;
 
     private const string FLY_ANIMATION = "Fly";
     private const string CLAW_ATTACK_ANIMATION = "ClawAttack";
@@ -36,7 +36,7 @@ public class BossAnimationController : MonoBehaviour {
     }
 
     private void ChangeAnimationState(string newAnimation) {
-        if(_currentAnimation == newAnimation) return;
+        //if(_currentAnimation == newAnimation) return;
 
         _animator.Play(newAnimation);
         _currentAnimation = newAnimation;

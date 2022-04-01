@@ -98,6 +98,8 @@ Transform:
   m_Children:
   - {fileID: 228554610}
   - {fileID: 1418495359}
+  - {fileID: 1380653431409868226}
+  - {fileID: 5879755580619740934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,8 +167,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4953692, y: 0.95535326}
-  m_Size: {x: 1.4681144, y: 1.4681144}
+  m_Offset: {x: 0.4797113, y: 0.9853956}
+  m_Size: {x: 1.4367986, y: 1.4583753}
   m_Direction: 0
 --- !u!50 &6228775523903590681
 Rigidbody2D:
@@ -187,8 +189,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!95 &3552406361628715649
 Animator:
   serializedVersion: 3
@@ -225,7 +227,9 @@ MonoBehaviour:
   takeOffSpeed: 0
   ladingSpeed: 0
   flyingDiveSpeed: 0
-  clawDamage: 0
+  fireballSpeed: 10
+  fireballDamage: 15
+  clawDamage: 20
   flyingDiveDamage: 0
   bossState: 1
   playerIsClose: 0
@@ -268,6 +272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0831667766629b428bb7f67b96d0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
+  _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
+  _horizontaFireballSpawnPoint: {fileID: 1380653431409868226}
+  _diagonalFireballSpawnPoint: {fileID: 5879755580619740934}
   lastAction: 6
 --- !u!114 &5450571183131910779
 MonoBehaviour:
@@ -281,3 +289,116 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510604bc017a9a249989045d913e566e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentAnimation: 
+--- !u!1 &4021601759228909289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1380653431409868226}
+  m_Layer: 7
+  m_Name: HorizontalFireballSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1380653431409868226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4021601759228909289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2, y: 0.948, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1543571436268770282}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4699043397167883821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5879755580619740934}
+  - component: {fileID: 7341185124983935213}
+  m_Layer: 7
+  m_Name: DiagonalFireballSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5879755580619740934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699043397167883821}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5, w: -0.8660254}
+  m_LocalPosition: {x: 0.957, y: 1.401, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1543571436268770282}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 300}
+--- !u!212 &7341185124983935213
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4699043397167883821}
+  m_Enabled: 0
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -4734781826887177590, guid: c01e9fd60da65b948bc5a67d2f094201, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
