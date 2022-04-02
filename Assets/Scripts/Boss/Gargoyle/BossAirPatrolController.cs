@@ -30,6 +30,9 @@ public class BossAirPatrolController : MonoBehaviour {
     }
 
     private void Update() {
+        if(_bossCoreController.isDead)
+            return;
+
         CheckPatrolTargetSide();
         CheckGroundWhenGoDown();
         CheckMaximumHeightWhenGoUp();
@@ -38,6 +41,9 @@ public class BossAirPatrolController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if(_bossCoreController.isDead)
+            return;
+            
         if(_bossCoreController.bossState == BossState.Air && _bossCoreController.mustPatrol)
             MoveThroughTheAir();
         
