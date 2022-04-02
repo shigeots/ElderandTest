@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228554609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0, z: 0}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418495358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1543571436268770282}
@@ -116,15 +116,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1543571436268770282}
+  - component: {fileID: 1997764731}
   - component: {fileID: 2843186560384533869}
   - component: {fileID: 7577207083727400414}
   - component: {fileID: 6228775523903590681}
   - component: {fileID: 3552406361628715649}
-  - component: {fileID: 1997764731}
   - component: {fileID: 1997764730}
   - component: {fileID: 2260227087792628052}
   - component: {fileID: 5727031862284953592}
   - component: {fileID: 5450571183131910779}
+  - component: {fileID: 5804257599772975364}
   m_Layer: 7
   m_Name: Gargoyle
   m_TagString: Boss
@@ -152,6 +153,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997764731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752027866906203976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23dc0e5d624838947947356772271baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  delayToAction: 0.3
+  takeOffSpeed: 2
+  ladingSpeed: 1.6
+  flyingDiveSpeed: 3
+  fireballSpeed: 8
+  fireballDamage: 15
+  clawDamage: 20
+  flyingDiveDamage: 1
 --- !u!212 &2843186560384533869
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -259,35 +281,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1997764731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752027866906203976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23dc0e5d624838947947356772271baf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  delayToAction: 0.5
-  takeOffSpeed: 2
-  ladingSpeed: 1.6
-  flyingDiveSpeed: 0
-  fireballSpeed: 8
-  fireballDamage: 15
-  clawDamage: 20
-  flyingDiveDamage: 0
-  _frontCheck: {fileID: 5388242360964417039}
-  _boxCastSize: {x: 1, y: 2}
-  _playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  bossState: 1
-  playerIsClose: 0
-  mustPatrol: 1
 --- !u!114 &1997764730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,8 +295,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _borderPatrolRightSide: {fileID: 228554610}
   _borderPatrolLeftSide: {fileID: 1418495359}
-  maximumHeight: 0
-  _mustKeepGoingDown: 0
 --- !u!114 &2260227087792628052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +338,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510604bc017a9a249989045d913e566e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5804257599772975364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752027866906203976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852dbea28e49dd4449083aa003ce7125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frontCheck: {fileID: 5388242360964417039}
+  _boxCastSize: {x: 1, y: 2}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &4021601759228909289
 GameObject:
   m_ObjectHideFlags: 0
