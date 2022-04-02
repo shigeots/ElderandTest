@@ -12,6 +12,8 @@ public class BossAirPatrolController : MonoBehaviour {
     private bool _reachedTheLimitPatrolSide = false;
     private bool _mustKeepGoingUp = false;
     private bool _mustKeepGoingDown = false;
+    private bool _initialAirDive = false;
+    private bool _finalAirDive = false;
     private Vector2 _direction = new Vector2(0f, 0f);
 
     private Transform _borderPatrolTargetSide;
@@ -31,6 +33,8 @@ public class BossAirPatrolController : MonoBehaviour {
         CheckPatrolTargetSide();
         CheckGroundWhenGoDown();
         CheckMaximumHeightWhenGoUp();
+        CheckGroundWhenAirDive();
+        CheckMaximumHeightWhenAirDive();
     }
 
     private void FixedUpdate() {
@@ -42,6 +46,12 @@ public class BossAirPatrolController : MonoBehaviour {
         
         if(_mustKeepGoingUp)
             GoUpToSky();
+        
+        if(_initialAirDive)
+            StartAirDive();
+
+        if(_finalAirDive)
+            FinishAirDive();
     }
 
     #endregion
@@ -61,15 +71,33 @@ public class BossAirPatrolController : MonoBehaviour {
         _borderPatrolLeftSide.parent = null;
     }
 
+    private void StartAirDive() {
+        if(_borderPatrolTargetSide == _borderPatrolRightSide) {
+            _direction = new Vector2(1f, -1f);
+        } else {
+            _direction = new Vector2(-1f, -1f);
+        }
+         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void FinishAirDive() {
+        if(_borderPatrolTargetSide == _borderPatrolRightSide) {
+            _direction = new Vector2(1f, 1f).normalized;
+        } else {
+            _direction = new Vector2(-1f, 1f).normalized;
+        }
+         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
+    }
+
     private void MoveThroughTheAir() {/*
         Vector3 distanceX = (new Vector3 (_borderPatrolTargetSide.transform.position.x, transform.position.y, transform.position.z));
         Vector3 _distance = (distanceX - transform.position).normalized;
         _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _distance * _bossCoreController.moveSpeed * Time.fixedDeltaTime);*/
         
         if(_borderPatrolTargetSide == _borderPatrolRightSide) {
-            _direction = new Vector2(1f, 0f);
+            _direction = new Vector2(1f, 0f).normalized;
         } else {
-            _direction = new Vector2(-1f, 0f);
+            _direction = new Vector2(-1f, 0f).normalized;
         }
          _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
     }
@@ -105,9 +133,29 @@ public class BossAirPatrolController : MonoBehaviour {
         }
     }
 
+    private void CheckGroundWhenAirDive() {
+        if(_bossCoreController.bossColliderController.isGrounded && _initialAirDive) {
+            _initialAirDive = false;
+            _finalAirDive = true;
+        }
+    }
+
+    private void CheckMaximumHeightWhenAirDive() {
+        if(Vector3.Distance(transform.position , new Vector3(transform.position.x, _borderPatrolTargetSide.position.y, transform.position.z)) <= 0.1f
+                && _finalAirDive) {
+            _finalAirDive = false;
+            _bossCoreController.mustPatrol = true;
+        }
+    }
+
     #endregion
 
     #region Internal methods
+
+    internal void AirDive() {
+        _bossCoreController.mustPatrol = false;
+        _initialAirDive = true;
+    }
 
     internal void GoUpToSky() {
         _bossCoreController.mustPatrol = false;
