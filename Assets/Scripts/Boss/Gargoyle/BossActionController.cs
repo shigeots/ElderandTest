@@ -27,15 +27,8 @@ public class BossActionController : MonoBehaviour {
 
     #region Internal methods
 
-    internal void DecideAction() {
-        if(_bossCoreController.bossState == BossState.Grounded) {
-            GroundAction();
-            return;
-        }
-        if(_bossCoreController.bossState == BossState.Air) {
-            AirAction();
-            return;
-        }
+    internal void StartDecideActionCoroutine() {
+        StartCoroutine(DecideActionCoroutine());
     }
 
     #endregion
@@ -44,6 +37,17 @@ public class BossActionController : MonoBehaviour {
 
     private void GetComponents() {
         _bossCoreController = GetComponent<BossCoreController>();
+    }
+
+    private void DecideAction() {
+        if(_bossCoreController.bossState == BossState.Grounded) {
+            GroundAction();
+            return;
+        }
+        if(_bossCoreController.bossState == BossState.Air) {
+            AirAction();
+            return;
+        }
     }
 
     private void GroundAction() {
@@ -114,12 +118,11 @@ public class BossActionController : MonoBehaviour {
             DoFly();
             return;
         }
-        Debug.Log("bug");
     }
 
     private void VerifyAirLastAction(BossAction actionToCheck) {
         if(lastAction == actionToCheck) {
-            Debug.Log("repetir");
+            Debug.Log("Repeat");
             AirAction();
             return;
         }
@@ -155,7 +158,8 @@ public class BossActionController : MonoBehaviour {
     private void DoFly() {
         Debug.Log("Fly");
         lastAction = BossAction.Fly;
-        _bossCoreController.bossAnimationController.PlayFlyAnimation();
+        _bossCoreController.bossState = BossState.Air;
+        _bossCoreController.bossAirPatrolController.GoUpToSky();
     }
 
     private void DoFireballOrFly() {
@@ -200,6 +204,8 @@ public class BossActionController : MonoBehaviour {
     private void DoLand() {
         Debug.Log("Land");
         lastAction = BossAction.Land;
+        _bossCoreController.bossState = BossState.Grounded;
+        _bossCoreController.bossAirPatrolController.GoDownToTheGround();
     }
 
     private void ShootHorizontalFireball() {
@@ -242,6 +248,15 @@ public class BossActionController : MonoBehaviour {
     private void DeactiveClawAttackCollider() {
         _clawAttackCollider.SetActive(false);
         //_clawAttackCollider.GetComponent<CircleCollider2D>().enabled = false;
+    }
+
+    #endregion
+
+    #region Coroutine
+
+    IEnumerator DecideActionCoroutine() {
+        yield return new WaitForSeconds(_bossCoreController.delayToAction);
+        DecideAction();
     }
 
     #endregion
