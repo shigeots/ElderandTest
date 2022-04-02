@@ -7,6 +7,10 @@ public class BossCoreController : MonoBehaviour {
 
     #region Private attributes
 
+    [SerializeField] private Transform _frontCheck;
+    [SerializeField] private Vector2 _boxCastSize;
+    [SerializeField] private LayerMask _playerLayer;
+
     #endregion
 
     #region Internal attributes
@@ -21,12 +25,9 @@ public class BossCoreController : MonoBehaviour {
     [SerializeField] internal int clawDamage;
     [SerializeField] internal int flyingDiveDamage;
 
-    [SerializeField] private Transform _frontCheck;
-    [SerializeField] private Vector2 _boxCastSize;
-    [SerializeField] private LayerMask _playerLayer;
-
     [SerializeField] internal BossState bossState = BossState.Air;
     [SerializeField] internal bool playerIsClose = false;
+    [SerializeField] internal bool mustPatrol = true;
 
     internal BossAirPatrolController bossAirPatrolController;
     internal BossColliderController bossColliderController;
@@ -79,11 +80,6 @@ public class BossCoreController : MonoBehaviour {
 
     internal void Flip() {
         transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-    }
-
-    [ContextMenu("ACTION")]
-    internal void CallDecideAction() {
-        bossActionController.DecideAction();
     }
 
     #endregion

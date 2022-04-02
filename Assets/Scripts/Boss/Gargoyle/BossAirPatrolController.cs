@@ -8,6 +8,11 @@ public class BossAirPatrolController : MonoBehaviour {
 
     [SerializeField] private Transform _borderPatrolRightSide;
     [SerializeField] private Transform _borderPatrolLeftSide;
+    
+    private bool _reachedTheLimitPatrolSide = false;
+    private bool _mustKeepGoingUp = false;
+    private bool _mustKeepGoingDown = false;
+    private Vector2 _direction = new Vector2(0f, 0f);
 
     private Transform _borderPatrolTargetSide;
     private BossCoreController _bossCoreController;
@@ -17,23 +22,35 @@ public class BossAirPatrolController : MonoBehaviour {
     #region MonoBehaviour methods
 
     private void Start() {
-        _borderPatrolTargetSide = _borderPatrolRightSide;
         GetComponents();
         RemoveChildToBorderPatrolSide();
+        SetInitialPatrolTargetSide();
     }
 
     private void Update() {
         CheckPatrolTargetSide();
+        CheckGroundWhenGoDown();
+        CheckMaximumHeightWhenGoUp();
     }
 
     private void FixedUpdate() {
-        if(_bossCoreController.bossState == BossState.Air)
+        if(_bossCoreController.bossState == BossState.Air && _bossCoreController.mustPatrol)
             MoveThroughTheAir();
+        
+        if(_mustKeepGoingDown)
+            GoDownToTheGround();
+        
+        if(_mustKeepGoingUp)
+            GoUpToSky();
     }
 
     #endregion
 
     #region Private methods
+
+    private void SetInitialPatrolTargetSide() {
+        _borderPatrolTargetSide = _borderPatrolRightSide;
+    }
 
     private void GetComponents() {
         _bossCoreController = GetComponent<BossCoreController>();
@@ -44,24 +61,79 @@ public class BossAirPatrolController : MonoBehaviour {
         _borderPatrolLeftSide.parent = null;
     }
 
-    private void MoveThroughTheAir() {
-        //Vector3 _direction = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
-        Vector3 _distance = (_borderPatrolTargetSide.transform.position - transform.position).normalized;
-        Vector3 _direction = new Vector3(_distance.x, 0f, 0f);
-            
-        _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
+    private void MoveThroughTheAir() {/*
+        Vector3 distanceX = (new Vector3 (_borderPatrolTargetSide.transform.position.x, transform.position.y, transform.position.z));
+        Vector3 _distance = (distanceX - transform.position).normalized;
+        _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _distance * _bossCoreController.moveSpeed * Time.fixedDeltaTime);*/
+        
+        if(_borderPatrolTargetSide == _borderPatrolRightSide) {
+            _direction = new Vector2(1f, 0f);
+        } else {
+            _direction = new Vector2(-1f, 0f);
+        }
+         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
     }
 
     private void CheckPatrolTargetSide() {
-        if(Vector3.Distance(transform.position , new Vector3(_borderPatrolTargetSide.position.x, transform.position.y, transform.position.z)) <= 0.1f) {
-            ChangePatrolTargetSide();
-            _bossCoreController.Flip();
+        if(Vector3.Distance(transform.position , new Vector3(_borderPatrolTargetSide.position.x, transform.position.y, transform.position.z)) <= 0.1f
+                && !_reachedTheLimitPatrolSide) {
+            
+            _reachedTheLimitPatrolSide = true;
+            StartCoroutine(TurnAroundCoroutine());
         }
     }
 
     private void ChangePatrolTargetSide() {
         _borderPatrolTargetSide = (_borderPatrolTargetSide == _borderPatrolRightSide) ? _borderPatrolLeftSide : _borderPatrolRightSide;
-        
+    }
+
+    private void CheckGroundWhenGoDown() {
+        if(_bossCoreController.bossColliderController.isGrounded && _mustKeepGoingDown) {
+            _mustKeepGoingDown = false;
+            _bossCoreController.bossAnimationController.PlayIdleOnGroundAnimation();
+            _bossCoreController.bossActionController.StartDecideActionCoroutine();
+            
+            Debug.Log("limite");
+        }
+    }
+
+    private void CheckMaximumHeightWhenGoUp() {
+        if(Vector3.Distance(transform.position , new Vector3(transform.position.x, _borderPatrolTargetSide.position.y, transform.position.z)) <= 0.1f
+                && _mustKeepGoingUp) {
+            _bossCoreController.mustPatrol = true;
+            _mustKeepGoingUp = false;
+        }
+    }
+
+    #endregion
+
+    #region Internal methods
+
+    internal void GoUpToSky() {
+        _bossCoreController.mustPatrol = false;
+        _mustKeepGoingUp = true;
+        _direction = new Vector2(0f, 1f);
+        _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.takeOffSpeed * Time.fixedDeltaTime);
+        _bossCoreController.bossAnimationController.PlayFlyAnimation();
+    }
+
+    internal void GoDownToTheGround() {
+        _bossCoreController.mustPatrol = false;
+        _mustKeepGoingDown = true;
+        _direction = new Vector2(0f, -1f);
+        _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.ladingSpeed * Time.fixedDeltaTime);
+    }
+
+    #endregion
+
+    #region Coroutine
+
+    IEnumerator TurnAroundCoroutine() {
+        yield return new WaitForSeconds(0.4f);
+        ChangePatrolTargetSide();
+        _bossCoreController.Flip();
+        _reachedTheLimitPatrolSide = false;
+        _bossCoreController.bossActionController.StartDecideActionCoroutine();
     }
 
     #endregion

@@ -213,7 +213,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.4797113, y: 0.9853956}
@@ -271,22 +271,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23dc0e5d624838947947356772271baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  delayToAction: 0
-  takeOffSpeed: 0
-  ladingSpeed: 0
+  moveSpeed: 3
+  delayToAction: 0.5
+  takeOffSpeed: 2
+  ladingSpeed: 1.6
   flyingDiveSpeed: 0
-  fireballSpeed: 10
+  fireballSpeed: 8
   fireballDamage: 15
   clawDamage: 20
   flyingDiveDamage: 0
   _frontCheck: {fileID: 5388242360964417039}
-  _boxCastSize: {x: 1, y: 1}
+  _boxCastSize: {x: 1, y: 2}
   _playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   bossState: 1
   playerIsClose: 0
+  mustPatrol: 1
 --- !u!114 &1997764730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _borderPatrolRightSide: {fileID: 228554610}
   _borderPatrolLeftSide: {fileID: 1418495359}
+  maximumHeight: 0
+  _mustKeepGoingDown: 0
 --- !u!114 &2260227087792628052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0831667766629b428bb7f67b96d0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clawAttackCollider: {fileID: 0}
+  _clawAttackCollider: {fileID: 296451601193473431}
   _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
   _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
   _horizontaFireballSpawnPoint: {fileID: 1380653431409868226}
