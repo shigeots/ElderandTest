@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private int _health = 100;
     [SerializeField] private float _speedOfMovement = 5f;
+    [SerializeField] private GameObject _attackCollider;
 
     private Rigidbody2D _rigidbody2D;
+    private Animator _animator;
     private float _xAxis;
     private bool _lookRight = true;
 
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         _xAxis = Input.GetAxis("Horizontal");
+
+        if(Input.GetKeyDown(KeyCode.J))
+            Attack();
     }
 
     private void FixedUpdate() {
@@ -35,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 
     private void GetComponents() {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Move() {
@@ -52,6 +58,18 @@ public class PlayerController : MonoBehaviour {
             _lookRight = !_lookRight;
             transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
+    }
+
+    private void Attack() {
+        _animator.Play("Attack");
+    }
+
+    private void ActiveAttackCollider() {
+        _attackCollider.SetActive(true);
+    }
+
+    private void DeactiveAttackCollider() {
+        _attackCollider.SetActive(false);
     }
 
     #endregion
