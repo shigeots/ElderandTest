@@ -199,6 +199,7 @@ public class BossActionController : MonoBehaviour {
     private void DoAirDive() {
         Debug.Log("Air dive");
         lastAction = BossAction.AirDiving;
+        _bossCoreController.bossAirPatrolController.AirDive();
     }
 
     private void DoLand() {
