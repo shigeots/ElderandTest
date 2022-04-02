@@ -6,9 +6,12 @@ public class FireballController : MonoBehaviour {
 
     #region Private attributes
 
-    [SerializeField] private int _damage = 0;
+    [SerializeField] private GameObject _explosionParticle;
+
+    private int _damage = 0;
 
     private const string TAG_GROUND = "Ground";
+    private const string TAG_PLAYER = "Player";
 
     #endregion
 
@@ -21,7 +24,8 @@ public class FireballController : MonoBehaviour {
     #region MonoBehaviour methods
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag(TAG_GROUND)) {
+        if (other.gameObject.CompareTag(TAG_GROUND) || other.gameObject.CompareTag(TAG_PLAYER) ) {
+            InstantiateExplosion();
             DestroyFireball();
         }
     }
@@ -32,6 +36,10 @@ public class FireballController : MonoBehaviour {
 
     private void DestroyFireball() {
         Destroy(gameObject);
+    }
+
+    private void InstantiateExplosion() {
+        Instantiate(_explosionParticle, transform.position, transform.rotation);
     }
 
     #endregion
