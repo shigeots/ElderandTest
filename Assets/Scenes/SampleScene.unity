@@ -322,14 +322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1997764731, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
-      propertyPath: _boxCastSize.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1997764731, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
-      propertyPath: _playerLayer.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 1543571436268770282, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
       propertyPath: m_RootOrder
       value: 1
