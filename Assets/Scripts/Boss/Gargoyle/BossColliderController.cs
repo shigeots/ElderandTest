@@ -12,12 +12,28 @@ public class BossColliderController : MonoBehaviour {
 
     #endregion
 
+    #region Internal attributes
+
     [SerializeField] internal bool isGrounded = false;
+
+    #endregion
 
     #region MonoBehaviour methods
 
     private void Start() {
         GetComponents();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag(TAG_GROUND)) {
+            isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.CompareTag(TAG_GROUND)) {
+            isGrounded = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
