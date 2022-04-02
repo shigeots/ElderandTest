@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Ground
   - Boss
-  - DamagesThePlayer
+  - DamageThePlayer
+  - DamageTheEnemy
   layers:
   - Default
   - TransparentFX
