@@ -5,34 +5,39 @@ using UnityEngine;
 
 public class BossCoreController : MonoBehaviour {
 
-    #region Private attributes
-
-    [SerializeField] private Transform _frontCheck;
-    [SerializeField] private Vector2 _boxCastSize;
-    [SerializeField] private LayerMask _playerLayer;
-
-    #endregion
-
     #region Internal attributes
 
-    [SerializeField] internal float moveSpeed;
-    [SerializeField] internal float delayToAction;
-    [SerializeField] internal float takeOffSpeed;
-    [SerializeField] internal float ladingSpeed;
-    [SerializeField] internal float flyingDiveSpeed;
-    [SerializeField] internal float fireballSpeed;
-    [SerializeField] internal int fireballDamage;
-    [SerializeField] internal int clawDamage;
-    [SerializeField] internal int flyingDiveDamage;
+    [Header("Movement speed and actions")]
+    [SerializeField, Range(1, 5), Tooltip("Boss movement speed. Minimum value 1 and maximum 5.")]
+    internal float moveSpeed;
+    [SerializeField, Range(0, 5), Tooltip("Delay time for each action. Minimum value 0 and maximum 5.")]
+    internal float delayToAction;
+    [SerializeField, Range(1, 5), Tooltip("Boss take off speed. Minimum value 1 and maximum 5.")]
+    internal float takeOffSpeed;
+    [SerializeField, Range(1, 5), Tooltip("Boss landing speed. Minimum value 1 and maximum 5.")]
+    internal float ladingSpeed;
+    [SerializeField, Range(1, 5), Tooltip("Air dive attack speed. Minimum value 1 and maximum 5.")]
+    internal float flyingDiveSpeed;
+    [SerializeField, Range(1, 20), Tooltip("Fireball projectile speed. Minimum value 1 and maximum 20.")]
+    internal float fireballSpeed;
 
-    [SerializeField] internal BossState bossState = BossState.Air;
-    [SerializeField] internal bool playerIsClose = false;
-    [SerializeField] internal bool mustPatrol = true;
+    [Header("Damage he can deal with his attacks")]
+    [SerializeField, Min(1), Tooltip("The damage of the fireball attack that can be dealt to the player. The value cannot be less than 1")]
+    internal int fireballDamage;
+    [SerializeField, Min(1), Tooltip("The damage of the claw attack that can be dealt to the player. The value cannot be less than 1")]
+    internal int clawDamage;
+    [SerializeField, Min(1), Tooltip("The damage of the air dive attack that can be dealt to the player. The value cannot be less than 1")]
+    internal int flyingDiveDamage;
+
+    internal BossState bossState = BossState.Air;
+    internal bool playerIsClose = false;
+    internal bool mustPatrol = true;
 
     internal BossAirPatrolController bossAirPatrolController;
     internal BossColliderController bossColliderController;
     internal BossActionController bossActionController;
     internal BossAnimationController bossAnimationController;
+    internal BossFrontCheckController bossFrontCheckController;
     internal Rigidbody2D bossRigidbody2D;
 
     #endregion
@@ -41,15 +46,6 @@ public class BossCoreController : MonoBehaviour {
 
     private void Start() {
         GetComponents();
-    }
-
-    private void Update() {
-        CheckPlayerIsFront();
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = new Color(255, 0, 0, 0.75F);
-        Gizmos.DrawWireCube(_frontCheck.position, _boxCastSize);
     }
 
     #endregion
@@ -62,16 +58,6 @@ public class BossCoreController : MonoBehaviour {
         bossActionController = GetComponent<BossActionController>();
         bossAnimationController = GetComponent<BossAnimationController>();
         bossRigidbody2D = GetComponent<Rigidbody2D>();
-    }
-
-    private void CheckPlayerIsFront() {
-        var boxCastHit2D = Physics2D.BoxCast(_frontCheck.position, _boxCastSize, 0f, Vector2.zero, .1f, _playerLayer);
-
-        if(boxCastHit2D) {
-            playerIsClose = true;
-        } else {
-            playerIsClose = false;
-        }
     }
 
     #endregion
