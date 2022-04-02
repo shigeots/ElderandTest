@@ -21,6 +21,9 @@ public class BossFrontCheckController : MonoBehaviour {
     }
 
     private void Update() {
+        if(_bossCoreController.isDead)
+            return;
+            
         CheckPlayerIsFront();
     }
 

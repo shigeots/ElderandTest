@@ -257,6 +257,10 @@ public class BossActionController : MonoBehaviour {
 
     IEnumerator DecideActionCoroutine() {
         yield return new WaitForSeconds(_bossCoreController.delayToAction);
+
+        if(_bossCoreController.isDead)
+            yield break;
+            
         DecideAction();
     }
 
