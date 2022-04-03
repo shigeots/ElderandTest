@@ -52,6 +52,7 @@ public class BossCoreController : MonoBehaviour {
     internal BossFrontCheckController bossFrontCheckController;
     internal BossDieController bossDieController;
     internal BossTakeDamageController bossTakeDamageController;
+    internal BossAudioController bossAudioController;
     internal Rigidbody2D bossRigidbody2D;
     internal SpriteRenderer spriteRenderer;
 
@@ -74,6 +75,7 @@ public class BossCoreController : MonoBehaviour {
         bossAnimationController = GetComponent<BossAnimationController>();
         bossDieController = GetComponent<BossDieController>();
         bossTakeDamageController = GetComponent<BossTakeDamageController>();
+        bossAudioController = GetComponent<BossAudioController>();
         bossRigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
