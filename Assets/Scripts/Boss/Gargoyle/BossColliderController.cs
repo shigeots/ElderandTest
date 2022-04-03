@@ -30,7 +30,7 @@ public class BossColliderController : MonoBehaviour {
             isGrounded = true;
         }
 
-        if(other.gameObject.CompareTag(TAG_DAMAGE_ENEMY)) {
+        if(other.gameObject.CompareTag(TAG_DAMAGE_ENEMY) && !_bossCoreController.isDead) {
             _bossCoreController.bossTakeDamage.FlickerForDamage();
         }
     }
