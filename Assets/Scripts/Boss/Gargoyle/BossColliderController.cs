@@ -31,7 +31,9 @@ public class BossColliderController : MonoBehaviour {
         }
 
         if(other.gameObject.CompareTag(TAG_DAMAGE_ENEMY) && !_bossCoreController.isDead) {
+            int damage = other.gameObject.GetComponent<IGetDamage>().GetDamage();
             _bossCoreController.bossTakeDamage.FlickerForDamage();
+            _bossCoreController.bossTakeDamage.TakeDamage(damage);
         }
     }
 
