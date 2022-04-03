@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BossActionController : MonoBehaviour {
-    #region Private attributes
+
+    #region Private fields
 
     [SerializeField] private GameObject _clawAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
@@ -19,7 +20,7 @@ public class BossActionController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 

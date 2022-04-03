@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class BossCoreController : MonoBehaviour {
 
-    #region Internal attributes
+    #region Internal fields
 
     [Header("Movement speed and actions")]
     [SerializeField, Range(1, 5), Tooltip("Boss movement speed. Minimum value 1 and maximum 5.")]
@@ -45,6 +45,7 @@ public class BossCoreController : MonoBehaviour {
     internal BossAnimationController bossAnimationController;
     internal BossFrontCheckController bossFrontCheckController;
     internal BossDieController bossDieController;
+    internal BossTakeDamage bossTakeDamage;
     internal Rigidbody2D bossRigidbody2D;
     internal SpriteRenderer spriteRenderer;
 
@@ -52,7 +53,7 @@ public class BossCoreController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 
@@ -66,6 +67,7 @@ public class BossCoreController : MonoBehaviour {
         bossActionController = GetComponent<BossActionController>();
         bossAnimationController = GetComponent<BossAnimationController>();
         bossDieController = GetComponent<BossDieController>();
+        bossTakeDamage = GetComponent<BossTakeDamage>();
         bossRigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

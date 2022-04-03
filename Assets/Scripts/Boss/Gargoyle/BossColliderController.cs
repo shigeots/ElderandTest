@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossColliderController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
     
     private BossCoreController _bossCoreController;
 
@@ -21,7 +21,7 @@ public class BossColliderController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 
@@ -31,7 +31,7 @@ public class BossColliderController : MonoBehaviour {
         }
 
         if(other.gameObject.CompareTag(TAG_DAMAGE_ENEMY)) {
-            Debug.Log("Recibir daño");
+            _bossCoreController.bossTakeDamage.FlickerForDamage();
         }
     }
 

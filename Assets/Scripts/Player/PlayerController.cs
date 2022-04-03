@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
 
     [SerializeField] private int _health = 100;
     [SerializeField] private float _speedOfMovement = 5f;
@@ -14,19 +14,20 @@ public class PlayerController : MonoBehaviour {
     private Animator _animator;
     private float _xAxis;
     private bool _lookRight = true;
+    private bool _canNextAttack = true;
 
     #endregion
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 
     private void Update() {
         _xAxis = Input.GetAxis("Horizontal");
 
-        if(Input.GetKeyDown(KeyCode.J))
+        if(Input.GetKeyDown(KeyCode.J) && _canNextAttack)
             Attack();
     }
 
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Attack() {
+        _canNextAttack = false;
         _animator.Play("Attack");
     }
 
@@ -70,6 +72,10 @@ public class PlayerController : MonoBehaviour {
 
     private void DeactiveAttackCollider() {
         _attackCollider.SetActive(false);
+    }
+
+    private void AvailableNextAttack() {
+        _canNextAttack = true;
     }
 
     #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossDieController : MonoBehaviour
 {
-    #region Private attributes
+    #region Private fields
 
     [SerializeField] private LayerMask _bossDeadLayer;
     [SerializeField] private CapsuleCollider2D _bossCapsuleCollider2D;
@@ -15,7 +15,7 @@ public class BossDieController : MonoBehaviour
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 
