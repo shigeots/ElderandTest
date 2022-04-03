@@ -86,7 +86,9 @@ public class BossAirPatrolController : MonoBehaviour {
         } else {
             _direction = new Vector2(-1f, -1f);
         }
-         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
+
+        _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
+        _bossCoreController.bossActionController.EnableAirDiveAttackCollider();
     }
 
     private void FinishAirDive() {
@@ -95,7 +97,7 @@ public class BossAirPatrolController : MonoBehaviour {
         } else {
             _direction = new Vector2(-1f, 1f).normalized;
         }
-         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
+        _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
     }
 
     private void MoveThroughTheAir() {/*
@@ -154,6 +156,7 @@ public class BossAirPatrolController : MonoBehaviour {
                 && _finalAirDive) {
             _finalAirDive = false;
             _bossCoreController.mustPatrol = true;
+            _bossCoreController.bossActionController.DisableAirDiveAttackCollider();
         }
     }
 
