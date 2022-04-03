@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour {
 
     #region Private fields
 
-    [SerializeField] private int _health = 100;
+    [SerializeField] private int _health;
     [SerializeField] private float _speedOfMovement = 5f;
     [SerializeField] private int _attackDamage;
     [SerializeField] private GameObject _attackCollider;
+    [SerializeField] private PlayerHealthBarController _playerHealthBarController;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     #region Properties
 
     public int AttackDamage { get => _attackDamage; set => _attackDamage = value; }
+    public int Health { get => _health; }
 
     #endregion
 
@@ -43,9 +45,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("DamageThePlayer")) {
+        if(other.gameObject.CompareTag("DamageThePlayer") && _health >= 0) {
             int damage = other.gameObject.GetComponent<IGetDamage>().GetDamage();
             _health -= damage;
+            _playerHealthBarController.UpdateHealthBar(damage);
+            _playerHealthBarController.UpdateHealthText(_health);
         }
     }
 
