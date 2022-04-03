@@ -42,6 +42,13 @@ public class PlayerController : MonoBehaviour {
         Move();
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("DamageThePlayer")) {
+            int damage = other.gameObject.GetComponent<IGetDamage>().GetDamage();
+            _health -= damage;
+        }
+    }
+
     #endregion
 
     #region Private methods

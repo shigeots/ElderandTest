@@ -7,6 +7,7 @@ public class BossActionController : MonoBehaviour {
     #region Private fields
 
     [SerializeField] private GameObject _clawAttackCollider;
+    [SerializeField] private CapsuleCollider2D _airDiveAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
     [SerializeField] private GameObject _diagonalFireballPrefab;
     [SerializeField] private Transform _horizontaFireballSpawnPoint;
@@ -243,13 +244,23 @@ public class BossActionController : MonoBehaviour {
     }
 
     private void ActiveClawAttackCollider() {
-        _clawAttackCollider.SetActive(true);
-        //_clawAttackCollider.GetComponent<CircleCollider2D>().enabled = true;
+        _clawAttackCollider.GetComponent<CircleCollider2D>().enabled = true;
     }
 
     private void DeactiveClawAttackCollider() {
-        _clawAttackCollider.SetActive(false);
-        //_clawAttackCollider.GetComponent<CircleCollider2D>().enabled = false;
+        _clawAttackCollider.GetComponent<CircleCollider2D>().enabled = false;
+    }
+
+    #endregion
+
+    #region Internal methods
+
+    internal void EnableAirDiveAttackCollider() {
+        _airDiveAttackCollider.enabled = true;
+    }
+
+    internal void DisableAirDiveAttackCollider() {
+        _airDiveAttackCollider.enabled = false;
     }
 
     #endregion
