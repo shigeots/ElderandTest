@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 5450571183131910779}
   - component: {fileID: 5804257599772975364}
   - component: {fileID: 3839027759308796630}
+  - component: {fileID: 2536095126079174526}
   m_Layer: 7
   m_Name: Gargoyle
   m_TagString: Boss
@@ -372,6 +373,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _bossCapsuleCollider2D: {fileID: 7577207083727400414}
+--- !u!114 &2536095126079174526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752027866906203976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6a4b2067ebffd4bbd6efeef84dad53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flickerDuration: 0.3
+  _damageFlickerMaterial: {fileID: 2100000, guid: bc2a1ca2ce89e6440b700653d1396572, type: 2}
 --- !u!1 &4021601759228909289
 GameObject:
   m_ObjectHideFlags: 0
