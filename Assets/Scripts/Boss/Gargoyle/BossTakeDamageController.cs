@@ -40,6 +40,8 @@ public class BossTakeDamageController : MonoBehaviour
     internal void TakeDamage(int amountOfDamage) {
         _bossCoreController.health -= amountOfDamage;
 
+        _bossCoreController.bossAudioController.PlayDamageSound();
+
         if(_bossCoreController.health < 0)
             _bossCoreController.health = 0;
         
