@@ -184,6 +184,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bossCoreController: {fileID: 1997764731}
   _attackDamage: 0
+--- !u!1 &1446414292007425146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4469144570553988890}
+  m_Layer: 7
+  m_Name: BackDustSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4469144570553988890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446414292007425146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44, y: 0.253, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1543571436268770282}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2752027866906203976
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +260,7 @@ Transform:
   - {fileID: 5879755580619740934}
   - {fileID: 3220494669078977488}
   - {fileID: 667215430}
+  - {fileID: 4469144570553988890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -405,9 +436,11 @@ MonoBehaviour:
   _airDiveAttackCollider: {fileID: 667215432}
   _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
   _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
-  _fireballCastPrefab: {fileID: 2753580564551598803, guid: 4bd1ea84f4436a748bb60942a353971d, type: 3}
+  _fireballCastEffectPrefab: {fileID: 2753580564551598803, guid: 4bd1ea84f4436a748bb60942a353971d, type: 3}
+  _backDustEffectPrefab: {fileID: 859301172737999330, guid: a1995acd25eecfd4cbda2aef90f853d9, type: 3}
   _horizontaFireballSpawnPoint: {fileID: 1380653431409868226}
   _diagonalFireballSpawnPoint: {fileID: 5879755580619740934}
+  _backDustEffectSpawnPoint: {fileID: 4469144570553988890}
   lastAction: 6
 --- !u!114 &5450571183131910779
 MonoBehaviour:
