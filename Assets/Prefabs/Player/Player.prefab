@@ -90,7 +90,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4288777507486608974}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -267,4 +267,3 @@ MonoBehaviour:
   _health: 100
   _speedOfMovement: 5
   _attackCollider: {fileID: 4288777507486608974}
-  _attackCircleCollider2D: {fileID: 332951687890727291}
