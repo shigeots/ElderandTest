@@ -10,9 +10,11 @@ public class BossActionController : MonoBehaviour {
     [SerializeField] private CapsuleCollider2D _airDiveAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
     [SerializeField] private GameObject _diagonalFireballPrefab;
-    [SerializeField] private GameObject _fireballCastPrefab;
+    [SerializeField] private GameObject _fireballCastEffectPrefab;
+    [SerializeField] private GameObject _backDustEffectPrefab;
     [SerializeField] private Transform _horizontaFireballSpawnPoint;
     [SerializeField] private Transform _diagonalFireballSpawnPoint;
+    [SerializeField] private Transform _backDustEffectSpawnPoint;
 
     [SerializeField] private BossAction lastAction = BossAction.None;
 
@@ -163,6 +165,7 @@ public class BossActionController : MonoBehaviour {
         lastAction = BossAction.Fly;
         _bossCoreController.bossState = BossState.Air;
         _bossCoreController.bossAirPatrolController.GoUpToSky();
+        ShowBackDustEffect();
     }
 
     private void DoFireballOrFly() {
@@ -214,7 +217,7 @@ public class BossActionController : MonoBehaviour {
 
     private void ShootHorizontalFireball() {
         GameObject fireball = Instantiate(_horizontaFireballPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
-        GameObject fireballCast = Instantiate(_fireballCastPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
+        GameObject fireballCast = Instantiate(_fireballCastEffectPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
         fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
         Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
 
@@ -231,7 +234,7 @@ public class BossActionController : MonoBehaviour {
 
     private void ShootDiagonalFireball() {
         GameObject fireball = Instantiate(_diagonalFireballPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
-        GameObject fireballCast = Instantiate(_fireballCastPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
+        GameObject fireballCast = Instantiate(_fireballCastEffectPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
 
         fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
         Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
@@ -243,6 +246,15 @@ public class BossActionController : MonoBehaviour {
         if(transform.localScale.x < 0) {
             fireball.transform.localScale = new Vector2(fireball.transform.localScale.x * -1, fireball.transform.localScale.y);
             fireballRigidbody2D.AddForce(-_diagonalFireballSpawnPoint.right * _bossCoreController.fireballSpeed, ForceMode2D.Impulse);
+            return;
+        }
+    }
+
+    private void ShowBackDustEffect() {
+        GameObject backDustEffect = Instantiate(_backDustEffectPrefab, _backDustEffectSpawnPoint.position, _backDustEffectSpawnPoint.rotation);
+
+        if(transform.localScale.x < 0) {
+            backDustEffect.transform.localScale = new Vector2(backDustEffect.transform.localScale.x * -1, backDustEffect.transform.localScale.y);
             return;
         }
     }
