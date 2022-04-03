@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballCastController : MonoBehaviour {
+public class EffectController : MonoBehaviour {
 
     #region Private methods
 
