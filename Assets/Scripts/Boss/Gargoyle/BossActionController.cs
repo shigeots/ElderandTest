@@ -6,7 +6,7 @@ public class BossActionController : MonoBehaviour {
 
     #region Private fields
 
-    [SerializeField] private GameObject _clawAttackCollider;
+    [SerializeField] private CircleCollider2D _clawAttackCollider;
     [SerializeField] private CapsuleCollider2D _airDiveAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
     [SerializeField] private GameObject _diagonalFireballPrefab;
@@ -18,7 +18,7 @@ public class BossActionController : MonoBehaviour {
     [SerializeField] private Transform _backDustEffectSpawnPoint;
     [SerializeField] private Transform _frontDustEffectSpawnPoint;
 
-    [SerializeField] private BossAction lastAction = BossAction.None;
+    private BossAction lastAction = BossAction.None;
 
     private BossCoreController _bossCoreController;
 
@@ -28,14 +28,6 @@ public class BossActionController : MonoBehaviour {
 
     private void Awake() {
         GetComponents();
-    }
-
-    #endregion
-
-    #region Internal methods
-
-    internal void StartDecideActionCoroutine() {
-        StartCoroutine(DecideActionCoroutine());
     }
 
     #endregion
@@ -67,14 +59,11 @@ public class BossActionController : MonoBehaviour {
 
         if(!_bossCoreController.playerIsClose && probability > 20) {
             VerifyGroundLastAction(BossAction.FireballFromGround);
-            Debug.Log(probability.ToString());
-
             return;
         }
 
         if(!_bossCoreController.playerIsClose && probability <= 20) {
             VerifyGroundLastAction(BossAction.Fly);
-            Debug.Log(probability.ToString());
             return;
         }
     }
@@ -83,19 +72,16 @@ public class BossActionController : MonoBehaviour {
         int probability = UnityEngine.Random.Range(1,101);
 
         if(probability <= 40) {
-            Debug.Log(probability.ToString());
             VerifyAirLastAction(BossAction.FireballFromAir);
             return;
         }
 
         if(probability > 40 && probability <= 80) {
-            Debug.Log(probability.ToString());
             VerifyAirLastAction(BossAction.AirDiving);
             return;
         }
 
         if(probability > 80) {
-            Debug.Log(probability.ToString());
             VerifyAirLastAction(BossAction.Land);
             return;
         }
@@ -129,7 +115,6 @@ public class BossActionController : MonoBehaviour {
 
     private void VerifyAirLastAction(BossAction actionToCheck) {
         if(lastAction == actionToCheck) {
-            Debug.Log("Repeat");
             AirAction();
             return;
         }
@@ -151,19 +136,16 @@ public class BossActionController : MonoBehaviour {
     }
 
     private void DoClaw() {
-        Debug.Log("Claw");
         lastAction = BossAction.Claw;
         _bossCoreController.bossAnimationController.PlayClawAttackAnimation();
     }
 
     private void DoFireballFromGround() {
-        Debug.Log("Fireball from ground");
         lastAction = BossAction.FireballFromGround;
         _bossCoreController.bossAnimationController.PlayFireballFromGroundAnimation();
     }
 
     private void DoFly() {
-        Debug.Log("Fly");
         lastAction = BossAction.Fly;
         _bossCoreController.bossState = BossState.Air;
         _bossCoreController.bossAirPatrolController.GoUpToSky();
@@ -199,19 +181,16 @@ public class BossActionController : MonoBehaviour {
     }
 
     private void DoFireballFromAir() {
-        Debug.Log("Fireball from air");
         lastAction = BossAction.FireballFromAir;
         _bossCoreController.bossAnimationController.PlayFireballFromAirAnimation();
     }
 
     private void DoAirDive() {
-        Debug.Log("Air dive");
         lastAction = BossAction.AirDiving;
         _bossCoreController.bossAirPatrolController.AirDive();
     }
 
     private void DoLand() {
-        Debug.Log("Land");
         lastAction = BossAction.Land;
         _bossCoreController.bossState = BossState.Grounded;
         _bossCoreController.bossAirPatrolController.GoDownToTheGround();
@@ -262,16 +241,20 @@ public class BossActionController : MonoBehaviour {
     }
 
     private void ActiveClawAttackCollider() {
-        _clawAttackCollider.GetComponent<CircleCollider2D>().enabled = true;
-    }
-
-    private void DeactiveClawAttackCollider() {
-        _clawAttackCollider.GetComponent<CircleCollider2D>().enabled = false;
+        _clawAttackCollider.enabled = true;
     }
 
     #endregion
 
     #region Internal methods
+
+    internal void StartDecideActionCoroutine() {
+        StartCoroutine(DecideActionCoroutine());
+    }
+
+    internal void DeactiveClawAttackCollider() {
+        _clawAttackCollider.enabled = false;
+    }
 
     internal void EnableAirDiveAttackCollider() {
         _airDiveAttackCollider.enabled = true;

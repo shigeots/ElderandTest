@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     private bool _lookRight = true;
     private bool _canNextAttack = true;
 
+    private const string TAG_DAMAGE_PLAYER = "DamageThePlayer";
+
     #endregion
 
     #region Properties
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("DamageThePlayer") && _health >= 0) {
+        if(other.gameObject.CompareTag(TAG_DAMAGE_PLAYER) && _health >= 0) {
             int damage = other.gameObject.GetComponent<IGetDamage>().GetDamage();
             _health -= damage;
             _playerHealthBarController.UpdateHealthBar(damage);

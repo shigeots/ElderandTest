@@ -39,6 +39,8 @@ public class BossDieController : MonoBehaviour
         _bossCoreController.bossAnimationController.PlayDieAnimation();
         _bossCoreController.bossRigidbody2D.isKinematic = false;
         _bossCapsuleCollider2D.isTrigger = false;
+        _bossCoreController.bossActionController.DisableAirDiveAttackCollider();
+        _bossCoreController.bossActionController.DeactiveClawAttackCollider();
         int layerValue = _bossDeadLayer.value;
         gameObject.layer =  LayerMask.NameToLayer("Boss/Dead");
         _bossCoreController.spriteRenderer.sortingOrder = -1;
