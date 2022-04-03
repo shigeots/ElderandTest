@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossAnimationController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
     
     private BossCoreController _bossCoreController;
     private Animator _animator;
@@ -22,7 +22,7 @@ public class BossAnimationController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 

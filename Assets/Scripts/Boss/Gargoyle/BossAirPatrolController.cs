@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossAirPatrolController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
 
     [SerializeField] private Transform _borderPatrolRightSide;
     [SerializeField] private Transform _borderPatrolLeftSide;
@@ -23,8 +23,11 @@ public class BossAirPatrolController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
+    }
+
+    private void Start() {
         RemoveChildToBorderPatrolSide();
         SetInitialPatrolTargetSide();
     }

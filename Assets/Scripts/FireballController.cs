@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireballController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
 
     [SerializeField] private GameObject _explosionParticle;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossFrontCheckController : MonoBehaviour {
 
-    #region Private attributes
+    #region Private fields
 
     [SerializeField] private Transform _frontCheck;
     [SerializeField] private Vector2 _boxCastSize;
@@ -16,7 +16,7 @@ public class BossFrontCheckController : MonoBehaviour {
 
     #region MonoBehaviour methods
 
-    private void Start() {
+    private void Awake() {
         GetComponents();
     }
 
