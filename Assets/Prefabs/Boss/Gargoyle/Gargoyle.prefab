@@ -284,9 +284,9 @@ MonoBehaviour:
   flyingDiveSpeed: 3.5
   fireballSpeed: 8
   delayToAction: 0.3
-  fireballDamage: 12
-  clawDamage: 25
-  flyingDiveDamage: 20
+  fireballDamage: 8
+  clawDamage: 20
+  flyingDiveDamage: 15
 --- !u!212 &2843186560384533869
 SpriteRenderer:
   m_ObjectHideFlags: 0
