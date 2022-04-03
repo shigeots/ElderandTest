@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4066512383559045443}
   - component: {fileID: 332951687890727291}
   - component: {fileID: 3527534607135127469}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: AttackCollider
   m_TagString: DamageTheEnemy
   m_Icon: {fileID: 0}
