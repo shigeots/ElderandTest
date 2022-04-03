@@ -1187,10 +1187,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gargoyle
       objectReference: {fileID: 0}
-    - target: {fileID: 4801971258842523013, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bfa23374627cdf4c99571fad12ad6a7, type: 3}
 --- !u!1001 &7834829614722971586
@@ -1200,10 +1196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1152955192, guid: 0da20e669b4912143bfc96e66e9c8153, type: 3}
-      propertyPath: _health
-      value: 120
-      objectReference: {fileID: 0}
     - target: {fileID: 1152955192, guid: 0da20e669b4912143bfc96e66e9c8153, type: 3}
       propertyPath: _playerHealthBarController
       value: 
