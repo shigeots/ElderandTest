@@ -10,6 +10,7 @@ public class BossActionController : MonoBehaviour {
     [SerializeField] private CapsuleCollider2D _airDiveAttackCollider;
     [SerializeField] private GameObject _horizontaFireballPrefab;
     [SerializeField] private GameObject _diagonalFireballPrefab;
+    [SerializeField] private GameObject _fireballCastPrefab;
     [SerializeField] private Transform _horizontaFireballSpawnPoint;
     [SerializeField] private Transform _diagonalFireballSpawnPoint;
 
@@ -213,6 +214,7 @@ public class BossActionController : MonoBehaviour {
 
     private void ShootHorizontalFireball() {
         GameObject fireball = Instantiate(_horizontaFireballPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
+        GameObject fireballCast = Instantiate(_fireballCastPrefab, _horizontaFireballSpawnPoint.position, _horizontaFireballSpawnPoint.rotation);
         fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
         Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
 
@@ -229,6 +231,8 @@ public class BossActionController : MonoBehaviour {
 
     private void ShootDiagonalFireball() {
         GameObject fireball = Instantiate(_diagonalFireballPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
+        GameObject fireballCast = Instantiate(_fireballCastPrefab, _diagonalFireballSpawnPoint.position, _diagonalFireballSpawnPoint.rotation);
+
         fireball.GetComponent<FireballController>().Damage = _bossCoreController.fireballDamage;
         Rigidbody2D fireballRigidbody2D = fireball.GetComponent<Rigidbody2D>();
 
