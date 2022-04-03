@@ -421,7 +421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 659453476}
   m_Layer: 0
-  m_Name: -------------Audios---------
+  m_Name: -----------Audios------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 713212354}
   m_Layer: 0
-  m_Name: ----------Environments--------------
+  m_Name: -------Environments-----------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,7 +693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1143627703}
   m_Layer: 0
-  m_Name: -------------Cameras---------------
+  m_Name: ----------Cameras------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1728512185}
   m_Layer: 0
-  m_Name: ---------------HUD----------------
+  m_Name: ------------HUD-------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1360,7 +1360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951578336}
   m_Layer: 0
-  m_Name: --------PlayerAndEnemies-----------
+  m_Name: -----PlayerAndEnemies--------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
