@@ -12,9 +12,11 @@ public class BossActionController : MonoBehaviour {
     [SerializeField] private GameObject _diagonalFireballPrefab;
     [SerializeField] private GameObject _fireballCastEffectPrefab;
     [SerializeField] private GameObject _backDustEffectPrefab;
+    [SerializeField] private GameObject _heavyDustEffectPrefab;
     [SerializeField] private Transform _horizontaFireballSpawnPoint;
     [SerializeField] private Transform _diagonalFireballSpawnPoint;
     [SerializeField] private Transform _backDustEffectSpawnPoint;
+    [SerializeField] private Transform _frontDustEffectSpawnPoint;
 
     [SerializeField] private BossAction lastAction = BossAction.None;
 
@@ -277,6 +279,21 @@ public class BossActionController : MonoBehaviour {
 
     internal void DisableAirDiveAttackCollider() {
         _airDiveAttackCollider.enabled = false;
+    }
+
+    internal void ShowHeavyDustEffect() {
+        GameObject backHeavyDustEffect = Instantiate(_heavyDustEffectPrefab, _backDustEffectSpawnPoint.position, _backDustEffectSpawnPoint.rotation);
+        GameObject frontHeavyDustEffect = Instantiate(_heavyDustEffectPrefab, _frontDustEffectSpawnPoint.position, _frontDustEffectSpawnPoint.rotation);
+
+        if(transform.localScale.x > 0) {
+            frontHeavyDustEffect.transform.localScale = new Vector2(frontHeavyDustEffect.transform.localScale.x * -1, frontHeavyDustEffect.transform.localScale.y);
+            return;
+        }
+
+        if(transform.localScale.x < 0) {
+            backHeavyDustEffect.transform.localScale = new Vector2(backHeavyDustEffect.transform.localScale.x * -1, backHeavyDustEffect.transform.localScale.y);
+            return;
+        }
     }
 
     #endregion
