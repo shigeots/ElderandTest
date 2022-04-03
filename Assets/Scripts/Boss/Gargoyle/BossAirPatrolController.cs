@@ -148,6 +148,7 @@ public class BossAirPatrolController : MonoBehaviour {
         if(_bossCoreController.bossColliderController.isGrounded && _initialAirDive) {
             _initialAirDive = false;
             _finalAirDive = true;
+            _bossCoreController.bossActionController.ShowHeavyDustEffect();
         }
     }
 
