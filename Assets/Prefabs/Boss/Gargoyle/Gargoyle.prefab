@@ -405,6 +405,7 @@ MonoBehaviour:
   _airDiveAttackCollider: {fileID: 667215432}
   _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
   _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
+  _fireballCastPrefab: {fileID: 2753580564551598803, guid: 4bd1ea84f4436a748bb60942a353971d, type: 3}
   _horizontaFireballSpawnPoint: {fileID: 1380653431409868226}
   _diagonalFireballSpawnPoint: {fileID: 5879755580619740934}
   lastAction: 6
