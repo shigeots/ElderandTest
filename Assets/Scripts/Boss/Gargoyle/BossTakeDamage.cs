@@ -37,6 +37,16 @@ public class BossTakeDamage : MonoBehaviour
 
     #region Internal methods
 
+    internal void TakeDamage(int amountOfDamage) {
+        _bossCoreController.health -= amountOfDamage;
+
+        if(_bossCoreController.health < 0)
+            _bossCoreController.health = 0;
+        
+        if(_bossCoreController.health == 0)
+            _bossCoreController.bossDieController.Die();
+    }
+
     internal void FlickerForDamage() {
         if (_flickerCoroutine != null)
             StopCoroutine(_flickerCoroutine);

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private int _health = 100;
     [SerializeField] private float _speedOfMovement = 5f;
+    [SerializeField] private int _attackDamage;
     [SerializeField] private GameObject _attackCollider;
 
     private Rigidbody2D _rigidbody2D;
@@ -15,6 +16,12 @@ public class PlayerController : MonoBehaviour {
     private float _xAxis;
     private bool _lookRight = true;
     private bool _canNextAttack = true;
+
+    #endregion
+
+    #region Properties
+
+    public int AttackDamage { get => _attackDamage; set => _attackDamage = value; }
 
     #endregion
 
