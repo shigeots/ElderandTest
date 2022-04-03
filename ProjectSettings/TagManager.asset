@@ -19,8 +19,8 @@ TagManager:
   - Boss/Live
   - Player
   - Boss/Dead
-  - 
-  - 
+  - DamageThePlayer
+  - DamageTheEnemy
   - 
   - 
   - 

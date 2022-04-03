@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 667215430}
   - component: {fileID: 667215432}
   - component: {fileID: 667215431}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: AirAttackCollider
   m_TagString: DamageThePlayer
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 3220494669078977488}
   - component: {fileID: 4801971258842523013}
   - component: {fileID: 41693247}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: ClawAttackCollider
   m_TagString: DamageThePlayer
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0831667766629b428bb7f67b96d0776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clawAttackCollider: {fileID: 296451601193473431}
+  _clawAttackCollider: {fileID: 4801971258842523013}
   _airDiveAttackCollider: {fileID: 667215432}
   _horizontaFireballPrefab: {fileID: 1272630148489969136, guid: ec2138c4d2512e94daf5e6017d22abd4, type: 3}
   _diagonalFireballPrefab: {fileID: 1272630148489969136, guid: 99f3e5594f5297b4da9e3b47c058ab41, type: 3}
@@ -444,7 +444,6 @@ MonoBehaviour:
   _diagonalFireballSpawnPoint: {fileID: 5879755580619740934}
   _backDustEffectSpawnPoint: {fileID: 4469144570553988890}
   _frontDustEffectSpawnPoint: {fileID: 5549950754972406791}
-  lastAction: 6
 --- !u!114 &5450571183131910779
 MonoBehaviour:
   m_ObjectHideFlags: 0

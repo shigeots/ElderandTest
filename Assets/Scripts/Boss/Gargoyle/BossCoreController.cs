@@ -51,7 +51,7 @@ public class BossCoreController : MonoBehaviour {
     internal BossAnimationController bossAnimationController;
     internal BossFrontCheckController bossFrontCheckController;
     internal BossDieController bossDieController;
-    internal BossTakeDamage bossTakeDamage;
+    internal BossTakeDamageController bossTakeDamageController;
     internal Rigidbody2D bossRigidbody2D;
     internal SpriteRenderer spriteRenderer;
 
@@ -73,7 +73,7 @@ public class BossCoreController : MonoBehaviour {
         bossActionController = GetComponent<BossActionController>();
         bossAnimationController = GetComponent<BossAnimationController>();
         bossDieController = GetComponent<BossDieController>();
-        bossTakeDamage = GetComponent<BossTakeDamage>();
+        bossTakeDamageController = GetComponent<BossTakeDamageController>();
         bossRigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

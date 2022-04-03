@@ -100,16 +100,13 @@ public class BossAirPatrolController : MonoBehaviour {
         _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.flyingDiveSpeed * Time.fixedDeltaTime);
     }
 
-    private void MoveThroughTheAir() {/*
-        Vector3 distanceX = (new Vector3 (_borderPatrolTargetSide.transform.position.x, transform.position.y, transform.position.z));
-        Vector3 _distance = (distanceX - transform.position).normalized;
-        _bossCoreController.bossRigidbody2D.MovePosition(transform.position + _distance * _bossCoreController.moveSpeed * Time.fixedDeltaTime);*/
-        
+    private void MoveThroughTheAir() {
         if(_borderPatrolTargetSide == _borderPatrolRightSide) {
             _direction = new Vector2(1f, 0f).normalized;
         } else {
             _direction = new Vector2(-1f, 0f).normalized;
         }
+
          _bossCoreController.bossRigidbody2D.MovePosition(_bossCoreController.bossRigidbody2D.position + _direction * _bossCoreController.moveSpeed * Time.fixedDeltaTime);
     }
 
@@ -131,8 +128,6 @@ public class BossAirPatrolController : MonoBehaviour {
             _mustKeepGoingDown = false;
             _bossCoreController.bossAnimationController.PlayIdleOnGroundAnimation();
             _bossCoreController.bossActionController.StartDecideActionCoroutine();
-            
-            Debug.Log("limite");
         }
     }
 
