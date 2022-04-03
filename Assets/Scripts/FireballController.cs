@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballController : MonoBehaviour {
+public class FireballController : MonoBehaviour, IGetDamage {
 
     #region Private fields
 
@@ -40,6 +40,14 @@ public class FireballController : MonoBehaviour {
 
     private void InstantiateExplosion() {
         Instantiate(_explosionParticle, transform.position, transform.rotation);
+    }
+
+    #endregion
+
+    #region Public methods
+
+    public int GetDamage() {
+        return Damage;
     }
 
     #endregion
