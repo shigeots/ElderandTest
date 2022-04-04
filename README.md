@@ -16,9 +16,10 @@
 
 ### Extra assets used.
 
-- Got the CineMachine to give the shaking effect when the gargoyle falls to the ground on the air dive.
-- Extracted DotWeen to give character bar animation when losing life. Also to animate the end of game screen.
-- Extracted TextMeshPro for interface texts.
+- The CineMachine was used to give the effect of shaking when the gargoyle falls to the ground on the air dive.
+- DotWeen was used to animate the player health bar when take damage from boss attack. Also to animate the game over screen.
+- TextMeshPro used for interface texts.
+- The TilePalette was used to create the game's scenery.
 
 ### Controls:
 - A and D Key for movement.
