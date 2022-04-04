@@ -17,6 +17,8 @@ public class BossActionController : MonoBehaviour {
     [SerializeField] private Transform _diagonalFireballSpawnPoint;
     [SerializeField] private Transform _backDustEffectSpawnPoint;
     [SerializeField] private Transform _frontDustEffectSpawnPoint;
+    [SerializeField] private VirtualCamaraController _virtualCamaraController;
+    
 
     private BossAction lastAction = BossAction.None;
 
@@ -277,6 +279,10 @@ public class BossActionController : MonoBehaviour {
             backHeavyDustEffect.transform.localScale = new Vector2(backHeavyDustEffect.transform.localScale.x * -1, backHeavyDustEffect.transform.localScale.y);
             return;
         }
+    }
+
+    internal void Quake() {
+        _virtualCamaraController.StartShakeCameraCoroutine();
     }
 
     #endregion

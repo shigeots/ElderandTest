@@ -542,6 +542,7 @@ MonoBehaviour:
   _diagonalFireballSpawnPoint: {fileID: 5879755580619740934}
   _backDustEffectSpawnPoint: {fileID: 4469144570553988890}
   _frontDustEffectSpawnPoint: {fileID: 5549950754972406791}
+  _virtualCamaraController: {fileID: 0}
 --- !u!114 &5450571183131910779
 MonoBehaviour:
   m_ObjectHideFlags: 0

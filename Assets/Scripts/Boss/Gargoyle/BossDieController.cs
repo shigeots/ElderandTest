@@ -27,6 +27,10 @@ public class BossDieController : MonoBehaviour
         _bossCoreController = GetComponent<BossCoreController>();
     }
 
+    private void CallWinGameEvent() {
+        EventObserver.WinGameEvent();
+    }
+
     #endregion
 
     #region Internal methods

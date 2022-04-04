@@ -144,6 +144,7 @@ public class BossAirPatrolController : MonoBehaviour {
             _initialAirDive = false;
             _finalAirDive = true;
             _bossCoreController.bossActionController.ShowHeavyDustEffect();
+            _bossCoreController.bossActionController.Quake();
         }
     }
 
