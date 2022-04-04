@@ -41,6 +41,7 @@ public class PlayerHealthBarController : MonoBehaviour {
             
         _healthBarImage.DOFillAmount(_healthByPercentage/ 100f, 1.5f)
             .SetLink(gameObject)
+            .SetUpdate(true)
             .Play();
     }
 

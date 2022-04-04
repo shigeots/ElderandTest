@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private int _attackDamage;
     [SerializeField] private GameObject _attackCollider;
     [SerializeField] private PlayerHealthBarController _playerHealthBarController;
-    [SerializeField] private VirtualCamaraController _virtualCamaraController;
 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
@@ -53,7 +52,10 @@ public class PlayerController : MonoBehaviour {
             _health -= damage;
             _playerHealthBarController.UpdateHealthBar(damage);
             _playerHealthBarController.UpdateHealthText(_health);
-            _virtualCamaraController.StartShakeCameraCoroutine();
+
+            if(_health <= 0) {
+                EventObserver.LoseGameEvent();
+            }
         }
     }
 
