@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class EndGameScreenController : MonoBehaviour {
 
     #region Private fields
 
-    [SerializeField] TextMeshProUGUI _winText;
-    [SerializeField] TextMeshProUGUI _loseText;
+    [SerializeField] Text _winText;
+    [SerializeField] Text _loseText;
     [SerializeField] private RectTransform _endGamePanel;
 
     private Canvas _endGameScreenCanvas;

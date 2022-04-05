@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
 
 public class PlayerHealthBarController : MonoBehaviour {
@@ -10,7 +9,7 @@ public class PlayerHealthBarController : MonoBehaviour {
     #region Private fields
     
     [SerializeField] private Image _healthBarImage;
-    [SerializeField] private TextMeshProUGUI _healthText;
+    [SerializeField] private Text _healthText;
     [SerializeField] private PlayerController _playerController;
 
     private float _healthByPercentage = 100f;
