@@ -8,6 +8,7 @@ public class BossTakeDamageController : MonoBehaviour
 
     [SerializeField] private float _flickerDuration;
     [SerializeField] private Material _damageFlickerMaterial;
+    [SerializeField] private BossHealthBarController _bossHealthBarController;
 
     private BossCoreController _bossCoreController;
     private Material _originalMaterial;
@@ -39,6 +40,7 @@ public class BossTakeDamageController : MonoBehaviour
 
     internal void TakeDamage(int amountOfDamage) {
         _bossCoreController.health -= amountOfDamage;
+        _bossHealthBarController.UpdateHealthBar(amountOfDamage);
 
         _bossCoreController.bossAudioController.PlayDamageSound();
 
